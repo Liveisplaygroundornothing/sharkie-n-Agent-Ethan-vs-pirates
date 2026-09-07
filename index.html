@@ -19,15 +19,16 @@
       border: 4px solid #4fb3bf;
       border-radius: 16px;
       padding: 20px;
-      width: 320px;
+      width: 340px;
       text-align: center;
       box-shadow: 0 8px 20px rgba(0,0,0,0.5);
     }
     .status-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 12px;
-      font-size: 18px;
+      font-size: 16px;
     }
     .drop-bar {
       display: flex;
@@ -44,11 +45,13 @@
       align-items: center;
       justify-content: center;
       font-size: 18px;
+      opacity: 0.3;
     }
     .drop-slot.filled {
       background: #00d2ff;
       border-style: solid;
       box-shadow: 0 0 10px #00d2ff;
+      opacity: 1;
     }
     .btn-group {
       display: flex;
@@ -58,7 +61,7 @@
     button {
       flex: 1;
       padding: 10px;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       border: none;
       border-radius: 8px;
@@ -87,7 +90,7 @@
 
 <div class="game-card">
   <div class="status-row">
-    <div>❤️ HP: <span id="hp">❤️❤️❤️</span></div>
+    <div>❤️ HP: <span id="hp">❤️❤️❤️❤️❤️</span></div>
     <div>🪙 Coins: <span id="coins">0</span></div>
   </div>
 
@@ -107,29 +110,27 @@
 </div>
 
 <script>
-  let hp = 3;
+  let hp = 5; // 修改初始血量为 5 颗心
   let coins = 0;
   let drops = 0;
 
   function updateUI() {
-    // Update Hearts
+    // 更新 Hearts 显示
     document.getElementById('hp').innerText = '❤️'.repeat(hp) || '☠️ Game Over';
-    // Update Coins
+    // 更新 Coins 显示
     document.getElementById('coins').innerText = coins;
     
-    // Update Water Drops
+    // 更新水滴槽
     for(let i = 1; i <= 3; i++) {
       let slot = document.getElementById('drop' + i);
       if(i <= drops) {
         slot.classList.add('filled');
-        slot.style.opacity = '1';
       } else {
         slot.classList.remove('filled');
-        slot.style.opacity = '0.3';
       }
     }
 
-    // Skill Button Visibility
+    // 判断大招按钮显示状态
     if(drops >= 3) {
       document.getElementById('skillBtn').style.display = 'block';
     } else {
@@ -150,7 +151,7 @@
   function useSkill() {
     alert("🌊 WATER SPLASH ACTIVATED! Pirate took double damage!");
     drops = 0;
-    coins += 20; // 技能附加双倍金币
+    coins += 20; // 技能额外奖励金币
     updateUI();
   }
 
