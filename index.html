@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sharkie Game Dashboard</title>
+
+  <!-- 💡 关键：加入这 4 行，专门解决 Canva 报错的问题 -->
   <meta property="og:title" content="Sharkie Game Dashboard">
-  <meta property="og:description" content="Interactive game status card for Canva lesson">
+  <meta property="og:description" content="Interactive HP, Coins and Water Skill Tracker for Canva Lessons">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://via.placeholder.com/300x200/0d2b45/ffffff?text=Sharkie+Game">
+
   <style>
     body {
       font-family: 'Comic Sans MS', 'Arial', sans-serif;
@@ -22,7 +27,7 @@
       border: 4px solid #4fb3bf;
       border-radius: 16px;
       padding: 20px;
-      width: 340px;
+      width: 320px;
       text-align: center;
       box-shadow: 0 8px 20px rgba(0,0,0,0.5);
     }
@@ -113,17 +118,14 @@
 </div>
 
 <script>
-  let hp = 5; // 修改初始血量为 5 颗心
+  let hp = 5;
   let coins = 0;
   let drops = 0;
 
   function updateUI() {
-    // 更新 Hearts 显示
     document.getElementById('hp').innerText = '❤️'.repeat(hp) || '☠️ Game Over';
-    // 更新 Coins 显示
     document.getElementById('coins').innerText = coins;
     
-    // 更新水滴槽
     for(let i = 1; i <= 3; i++) {
       let slot = document.getElementById('drop' + i);
       if(i <= drops) {
@@ -133,7 +135,6 @@
       }
     }
 
-    // 判断大招按钮显示状态
     if(drops >= 3) {
       document.getElementById('skillBtn').style.display = 'block';
     } else {
@@ -154,11 +155,10 @@
   function useSkill() {
     alert("🌊 WATER SPLASH ACTIVATED! Pirate took double damage!");
     drops = 0;
-    coins += 20; // 技能额外奖励金币
+    coins += 20;
     updateUI();
   }
 
-  // 初始化 UI
   updateUI();
 </script>
 
